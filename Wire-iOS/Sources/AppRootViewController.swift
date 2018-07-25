@@ -228,9 +228,11 @@ import Classy
             }
             
             if needsToReauthenticate {
+                let hasMultipleAccounts = (SessionManager.shared?.accountManager.accounts.count ?? 0) <= 1
                 let registrationViewController = RegistrationViewController()
                 registrationViewController.delegate = appStateController
                 registrationViewController.signInError = error
+                registrationViewController.shouldHideCancelButton = !hasMultipleAccounts
                 viewController = registrationViewController
             }
             else if addingNewAccount {
